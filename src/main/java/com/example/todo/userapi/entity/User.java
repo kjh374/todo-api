@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
-@Setter @Getter
+@Getter
 @ToString @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -40,7 +40,12 @@ public class User {
     @Enumerated(EnumType.STRING)
 //    @ColumnDefault("'COMMON'")
     @Builder.Default
-    private Role role = Role.COMMON;
+    private Role role = Role.COMMON; // 유저 권한
+
+    // 등급 수정 메서드
+    public void changeRole(Role role){
+        this.role = role;
+    }
 
 
 }
