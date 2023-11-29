@@ -72,7 +72,10 @@ public class TodoController {
 
     // 할 일 삭제 요청
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteTodo(@PathVariable("id") String todoId){
+    public ResponseEntity<?> deleteTodo(
+            @PathVariable("id") String todoId,
+        @AuthenticationPrincipal TokenUserInfo userInfo
+    ){
         log.info("/api/todos/{} DELETE request!", todoId);
 
         if(todoId == null || todoId.trim().equals("")){
@@ -84,7 +87,7 @@ public class TodoController {
         }
 
         try {
-            TodoListResponseDTO responseDTO = todoService.delete(todoId);
+            TodoListResponseDTO responseDTO = todoService.delete(todoId, userInfo.getUserId());
             return ResponseEntity.ok().body(responseDTO);
         } catch (Exception e) {
             return ResponseEntity
@@ -95,6 +98,7 @@ public class TodoController {
     // 할 일 수정하기
     @RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
     public ResponseEntity<?> updateTodo(
+            @AuthenticationPrincipal TokenUserInfo userInfo,
             @Validated @RequestBody TodoModifyRequestDTO requestDTO,
             BindingResult result,
             HttpServletRequest request
@@ -107,7 +111,7 @@ public class TodoController {
         log.info("modifying dto: {}", requestDTO);
 
         try {
-            TodoListResponseDTO responseDTO = todoService.update(requestDTO);
+            TodoListResponseDTO responseDTO = todoService.update(requestDTO, userInfo.getUserId());
             return ResponseEntity.ok().body(responseDTO);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(TodoListResponseDTO.builder().error(e.getMessage()).build());
