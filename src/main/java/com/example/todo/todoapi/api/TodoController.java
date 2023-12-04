@@ -48,7 +48,7 @@ public class TodoController {
         } catch (IllegalStateException e){
             // 권한 때문에 발생한 예외
             log.warn(e.getMessage());
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED) // 401
                     .body(e.getMessage());
         } catch (RuntimeException e) {
             e.printStackTrace();

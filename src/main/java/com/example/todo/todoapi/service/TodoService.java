@@ -45,7 +45,7 @@ public class TodoService {
         // 일반 회원이 일정을 5개 초과해서 작성하면 예외를 발생.
         if(userInfo.getRole() == Role.COMMON
                 && todoRepository.countByUser(user) >= 5){
-            throw new IllegalArgumentException("일반회원은 더 이상 일정을 작성할 수 없습니다.");
+            throw new IllegalStateException("일반회원은 더 이상 일정을 작성할 수 없습니다.");
         }
 
         todoRepository.save(requestDTO.toEntity(user));
