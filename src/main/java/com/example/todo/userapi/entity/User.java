@@ -44,10 +44,15 @@ public class User {
 
     private String profileImg; // 프로필 이미지 경로
 
+    private String accessToken;; // 카카오 로그인 시 발급받는 accessToken을 저장 -> 로그아웃 때 필요
+
     // 등급 수정 메서드
     public void changeRole(Role role){
         this.role = role;
     }
 
+    public void setAccessToken(String accessToken){
+        this.accessToken = accessToken;
+    }
 
 }
