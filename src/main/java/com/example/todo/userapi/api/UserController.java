@@ -204,6 +204,7 @@ public class UserController {
 
     @GetMapping("/kakaoLogin")
     public ResponseEntity<?> kakaoLogin(String code){ //@RequestParam 생략 가능한가"???
+
         log.info("api/auth/kakaoLogin - GET! -code: {}", code);
         LoginResponseDTO responseDTO = userService.kakaoService(code);
 
