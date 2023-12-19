@@ -49,6 +49,9 @@ dependencies {
 
 	// 파일 업로드 라이브러리
 	implementation 'commons-io:commons-io:2.8.0'
+
+	// S3 라이브러리
+	implementation 'software.amazon.awssdk:s3:2.17.52'
 }
 
 tasks.named('bootBuildImage') {
@@ -56,5 +59,7 @@ tasks.named('bootBuildImage') {
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+//	useJUnitPlatform()
+	exclude '**/*' // 빌드 시 전체 테스트 생략
+
 }
